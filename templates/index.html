@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Book Genre Predictor</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- ✅ Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 font-sans leading-normal tracking-normal">
+    <div class="min-h-screen flex items-center justify-center">
+        <div class="w-full max-w-2xl bg-white rounded-xl shadow-lg p-8">
+            <h1 class="text-3xl font-bold text-center text-indigo-600 mb-6">📚 Book Genre Predictor</h1>
+            <form method="POST" class="space-y-6">
+                <div>
+                    <label for="summary" class="block text-gray-700 text-lg font-medium mb-2">Enter a brief summary of the book:</label>
+                    <textarea id="summary" name="summary" rows="6" placeholder="e.g., A young wizard begins his journey at a magical school..."
+                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400 resize-y text-gray-800 text-base">{{ '' if showresult else request.form.summary }}</textarea>
+                </div>
+                <div class="text-center">
+                    <button type="submit" class="bg-indigo-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-indigo-700 transition duration-300">
+                        🔍 Predict Genre
+                    </button>
+                </div>
+            </form>
+
+            {% if showresult %}
+            <div class="mt-8 p-6 bg-green-50 border-l-4 border-green-500 rounded-lg shadow-inner">
+                <h3 class="text-xl font-semibold text-green-800 mb-2">📖 Prediction Result</h3>
+                <p class="text-gray-700"><strong>Summary Snippet:</strong> "{{ text }}..."</p>
+                <p class="mt-2 text-lg"><strong>Predicted Genre:</strong> <span class="text-indigo-600 font-bold">{{ Prediction }}</span></p>
+            </div>
+            {% endif %}
+
+            {% if error %}
+            <div class="mt-4 p-4 bg-red-100 text-red-700 text-center rounded-lg font-semibold">
+                {{ error }}
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>
